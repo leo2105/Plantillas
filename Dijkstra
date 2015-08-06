@@ -1,0 +1,77 @@
+#include<bits/stdc++.h>
+#define f(i,x,y) for (int i = x; i < y; i++)
+#define fd(i,x,y) for(int i = x; i>= y; i--)
+#define FOR(it,A) for(typeof A.begin() it = A.begin(); it!=A.end(); it++)
+#define all(v) (v).begin(), (v).end()
+#define rall(v) (v).rbegin(), (v).rend()
+#define vint vector<int>
+#define ll long long
+#define clr(A,x) memset(A, x, sizeof A)
+#define pb push_back
+#define pii pair<int,int>
+#define fst first
+#define snd second
+#define ones(x) __builtin_popcount(x)
+#define eps (1e-9)
+#define oo (1<<30)
+
+using namespace std;
+vector<pii> Graph[106];
+ll dis[106];
+
+bool operator < (pii A, pii B){
+	return dis[A.snd] < dis[B.snd];
+}
+
+void dijkstra(int s){
+	memset(dis,1,sizeof dis);
+	dis[s]=0;
+	multiset<pii> PQ;
+	PQ.insert(pii(0,s));
+
+	while(!PQ.empty()){
+		pii top = *PQ.begin();
+		PQ.erase(PQ.begin());
+		int d,u;
+		d=top.first; u=top.second;
+
+        FOR(it,Graph[u]){
+			int v=it->fst;
+			int w=it->snd;
+			if(dis[u]+w <dis[v]){
+				dis[v]=dis[u]+w;
+				PQ.insert(pii(dis[v],v));
+			}
+		}
+	}
+}
+
+
+int main(){
+
+int count=0;
+int src;
+int E;
+
+cout<<"Ingresar la cantidad de Aristas: ";
+cin>>E;
+cout<<"Ingresar el Inicio: ";
+cin>>src;
+for(int i=0;i<E;i++){
+
+	int u,v,w;cin>>u>>v>>w;
+	Graph[u].pb(pii(v,w));// Nodo u apunta a Nodo v con peso w
+	Graph[v].pb(pii(u,w));// Nodo v apunta a Nodo u con peso w
+						  // Grafo no dirigido
+}
+
+dijkstra(src);
+cout<<endl;
+for(int i=0;i<E;i++){
+	cout<<dis[i]<<" ";
+}
+
+cout<<endl;
+return 0;
+}
+
