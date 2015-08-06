@@ -1,0 +1,44 @@
+#include <iostream>
+#include <vector>
+#define vi vector<vector<int> >
+#define pb push_back
+#define f(i,x,y) for(int i=x;i<y;i++)
+#define fd(i,x,y) for(int i=x;i>=y;i--)
+using namespace std;
+
+vi comb;
+int N;
+
+void Pascal(int m,int n)
+{
+	comb.resize(m);
+	f(i,0,m)
+		comb[i].resize(n);
+
+    f(i,0,m)
+        f(j,0,n)
+            comb[i][j]=0;
+
+	f(i,0,n)
+		comb[0][i]=1;
+	f(i,1,m)
+		comb[i][0]=1;
+	f(i,1,m)
+		f(j,1,n)
+			comb[i][j]= comb[i-1][j] + comb[i][j-1];
+
+}
+int main()
+{
+	int m,n;
+	cout<<"Ingresar m x n: ";
+	cin>>m>>n;
+	Pascal(m,n);
+	f(i,0,m)
+	{
+		f(j,0,n)
+			cout<<comb[i][j]<<"\t";
+		cout<<endl<<endl;
+	}
+	return 0;
+}
