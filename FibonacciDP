@@ -1,0 +1,47 @@
+#include <bits/stdc++.h>
+#include <map>
+#define MD 1000000
+using namespace std;
+
+typedef long long lii;
+
+map<lii,lii> M;
+
+lli A,B;
+
+void init()
+{
+	M.clear();
+	M[0] = 0;
+	M[1] = 1;
+	M[2] = 1;
+}
+
+lii fib(lii x)
+{
+	lii k,a,b;
+
+	if(M.find(x) != M.end()) return M[x];
+
+	k = (x+1)/2;
+	a = fib(k);
+	b = fib(k-1);
+
+	if(x % 2 == 0) return M[x] = ((a*a) % MD + (2*a*b) % MD) % MD;
+	return M[x] = ((a*a) % MD + (b*b) % MD) % MD;
+}
+
+int main()
+{
+	int T;
+	
+	cout<<"Ingresar T: ";
+	while(cin>>T)
+	{
+		init();
+		cin>>x;
+		cout<<"Encontrar el termino n-esimo: ";
+		cout<<fib(x)<<endl;
+	}
+	return 0;
+}
