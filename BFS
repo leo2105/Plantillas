@@ -1,0 +1,66 @@
+#include <bits/stdc++.h>
+#define f(i,x,y) for (int i = x; i < y; i++)
+#define fd(i,x,y) for(int i = x; i>= y; i--)
+#define FOR(it,A) for(typeof A.begin() it = A.begin(); it!=A.end(); it++)
+#define vint vector<int>
+#define ll long long
+#define clr(A,x) memset(A, x, sizeof A)
+#define pb push_back
+#define pii pair<int,int>
+#define mp make_pair
+#define fst first
+#define snd second
+#define ones(x) __builtin_popcount(x)
+#define eps (1e-9)
+#define NOsync ios_base::sync_with_stdio(0)
+#define oo (1<<30)
+#define OO (1LL<<60)
+#define N 1005
+
+using namespace std;
+vector<int> Graph[N];
+int d[N];
+int vis[N];
+
+void BFS(int source){
+    queue<int> Q;
+    d[source] = 0;
+    vis[source] = 1;
+    Q.push(source);
+    
+    while(!Q.empty()){
+        int u = Q.front();
+        Q.pop();
+        FOR(it,Graph[u]){
+            int v=*it;
+            if(!vis[v]){
+                vis[v]=1;
+                d[v] = d[u]+1;
+                Q.push(v);
+                cout<<v<<" "; // Imprime el recorrido del BFS
+            }
+        }
+    }
+}
+
+int main()
+{
+    int inicio,E,a,b;
+
+    cout<<"Ingresar la cantidad de Aristas: ";
+    cin>>E;
+    cout<<"Ingresar los nodos conectados: \n";
+    f(i,0,E)
+    {
+        cin>>a>>b;
+        Graph[a].pb(b); // Nodo a apunta al Nodo b
+        Graph[b].pb(a); // Nodo b apunta al Nodo a
+    }
+    cout<<"\nIngresar el inicio: ";
+    cin>>inicio;
+    cout<<inicio<<" ";
+    
+    BFS(inicio);
+    
+    cout<<endl;
+}
