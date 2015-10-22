@@ -1,0 +1,23 @@
+#include <stdio.h>
+#include <string.h>
+#include <stdlib.h>
+
+int main()
+{
+	char linebuf[1024];
+	char* token;
+	int sum;
+
+	while(fgets(linebuf,sizeof(linebuf),stdin) != 0)
+	{
+		sum=0;
+		token = strtok(linebuf," ");
+		while(token != NULL)
+		{
+			sum+=atoi(token);
+			token = strtok(NULL," ");
+		}
+		printf("%d\n",sum);
+	}
+	return 0;
+}
