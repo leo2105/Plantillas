@@ -6,7 +6,7 @@
 #define E 6    // Aristas
 using namespace std;
 
-int vis[N];
+bool vis[N];
 vector<int> G[N];
 
 void dfs(int s){
@@ -26,6 +26,6 @@ int main(){
 		G[b].push_back(a);
 	}
   cin>>start;
-	dfs(0);
+	dfs(start);
 	return 0;
 }
